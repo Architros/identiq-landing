@@ -1,0 +1,36 @@
+/**
+ * Identiq design tokens — aligned with main app theme.css
+ */
+
+:root {
+  --accent: #f86e29;
+  --on-accent: #ffffff;
+
+  --background: #f7f7f8;
+  --surface: #ffffff;
+  --sidebar-active: #efefef;
+  --input: #ececef;
+  --input-hover: #e2e2e6;
+
+  --foreground: #111827;
+  --muted: #6b7280;
+
+  --border: #e5e7eb;
+
+  --radius-card: 14px;
+  --radius-button: 10px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-sidebar-active: var(--sidebar-active);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --font-sans: var(--font-geist-sans);
+  --radius-card: var(--radius-card);
+  --radius-button: var(--radius-button);
+}
