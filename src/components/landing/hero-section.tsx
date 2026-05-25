@@ -36,7 +36,7 @@ export function HeroSection() {
           className="mx-auto flex w-full max-w-2xl flex-col items-center text-center"
         >
           <Link
-            href="#product"
+            href="#how-it-works"
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-white backdrop-blur-md transition-colors hover:bg-white/15"
           >
             <span>{announcement}</span>
@@ -44,7 +44,9 @@ export function HeroSection() {
           </Link>
 
           <h1 className="font-display text-4xl leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.25rem]">
-            {hero.headline}
+            {hero.headline.before}
+            <span className="text-accent">{hero.headline.highlight}</span>
+            {hero.headline.after}
           </h1>
           <p className="mt-5 max-w-lg text-base leading-relaxed text-white/90 sm:text-lg">
             {hero.subheadline}
@@ -52,9 +54,6 @@ export function HeroSection() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <PillButton href={APP_LINKS.startBrand()} variant="hero">
               {hero.cta}
-            </PillButton>
-            <PillButton href={hero.mediaCard.href} variant="ghost">
-              {hero.mediaCard.linkLabel}
             </PillButton>
           </div>
         </motion.div>

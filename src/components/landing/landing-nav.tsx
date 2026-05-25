@@ -7,10 +7,7 @@ import { APP_LINKS } from "@/lib/app-url";
 import { cn } from "@/lib/utils";
 import { PillButton } from "@/components/landing/pill-button";
 
-const NAV_LINKS = [
-  { label: "Product", href: "#product" },
-  { label: "How it works", href: "#how-it-works" },
-] as const;
+const NAV_LINKS = [{ label: "How it works", href: "#how-it-works" }] as const;
 
 export function LandingNav() {
   const [scrolled, setScrolled] = useState(false);

@@ -1,9 +1,13 @@
 export const LANDING_COPY = {
   announcement: "AI brand system — from logo to launch-ready assets",
   hero: {
-    headline: "Your brand, built in minutes. On-brand everywhere.",
+    headline: {
+      before: "The ",
+      highlight: "brand",
+      after: " OS layer for ambitious companies.",
+    },
     subheadline:
-      "AI brand system — kit, colors, fonts, and campaign-ready assets in one place.",
+      "Identity, assets, and on-brand campaigns in one system — from first logo to launch.",
     cta: "Start your brand",
     mediaCard: {
       title: "See what you can ship on day one.",
