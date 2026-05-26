@@ -1,24 +1,38 @@
 /**
  * Vercel / standalone landing builds clone the main identiq app for shared @/ imports.
- * In the monorepo (../src present), cloning is skipped.
+ * In the monorepo (../src present), cloning is skipped unless VERCEL=1.
  */
 import { execSync } from "node:child_process";
-import { existsSync } from "node:fs";
+import { existsSync, rmSync } from "node:fs";
 import path from "node:path";
+import { setTimeout } from "node:timers/promises";
 import { fileURLToPath } from "node:url";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
+const isVercel = process.env.VERCEL === "1";
 const siblingSrc = path.join(root, "../src/components");
 const vendorRoot = path.join(root, "vendor/identiq");
 const vendorSrc = path.join(vendorRoot, "src/components");
+const markerFile = path.join(vendorSrc, "ui/texture-button.tsx");
 
-if (existsSync(siblingSrc)) {
+function vendorIsComplete() {
+  return (
+    existsSync(markerFile) &&
+    existsSync(path.join(vendorSrc, "billing/billing-plans-section.tsx")) &&
+    existsSync(path.join(vendorSrc, "marketing/faq-accordion.tsx"))
+  );
+}
+
+if (existsSync(siblingSrc) && !isVercel) {
   console.log("[sync-identiq-app] Monorepo ../src detected — skipping clone.");
   process.exit(0);
 }
 
-if (existsSync(vendorSrc)) {
-  console.log("[sync-identiq-app] vendor/identiq already present — skipping clone.");
+if (existsSync(vendorRoot) && (!vendorIsComplete() || isVercel)) {
+  console.log("[sync-identiq-app] Refreshing vendor/identiq…");
+  rmSync(vendorRoot, { recursive: true, force: true });
+} else if (vendorIsComplete()) {
+  console.log("[sync-identiq-app] vendor/identiq is up to date — skipping clone.");
   process.exit(0);
 }
 
@@ -36,15 +50,45 @@ if (token && cloneUrl.startsWith("https://github.com/")) {
   );
 }
 
-console.log(`[sync-identiq-app] Cloning ${repo} @ ${ref} → vendor/identiq`);
-execSync(
-  `git clone --depth 1 --branch "${ref}" "${cloneUrl}" "${vendorRoot}"`,
-  { stdio: "inherit", cwd: root },
-);
-
-if (!existsSync(vendorSrc)) {
-  console.error("[sync-identiq-app] Clone succeeded but src/components is missing.");
-  process.exit(1);
+function cloneOnce() {
+  execSync(
+    `git clone --depth 1 --branch "${ref}" "${cloneUrl}" "${vendorRoot}"`,
+    { stdio: "inherit", cwd: root },
+  );
 }
 
-console.log("[sync-identiq-app] Done.");
+async function main() {
+  console.log(`[sync-identiq-app] Cloning ${repo} @ ${ref} → vendor/identiq`);
+
+  let lastError;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      if (existsSync(vendorRoot)) {
+        rmSync(vendorRoot, { recursive: true, force: true });
+      }
+      cloneOnce();
+      lastError = undefined;
+      break;
+    } catch (error) {
+      lastError = error;
+      console.warn(`[sync-identiq-app] Clone attempt ${attempt} failed.`);
+      if (attempt < 3) await setTimeout(2000);
+    }
+  }
+
+  if (lastError) {
+    console.error("[sync-identiq-app] All clone attempts failed.");
+    throw lastError;
+  }
+
+  if (!vendorIsComplete()) {
+    console.error(
+      "[sync-identiq-app] Clone finished but required shared files are missing.",
+    );
+    process.exit(1);
+  }
+
+  console.log("[sync-identiq-app] Done.");
+}
+
+await main();
