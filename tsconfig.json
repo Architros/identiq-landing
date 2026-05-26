@@ -15,7 +15,7 @@
     "incremental": true,
     "plugins": [{ "name": "next" }],
     "paths": {
-      "@/*": ["../src/*"],
+      "@/*": ["./vendor/identiq/src/*", "../src/*"],
       "@landing/*": ["./src/*"]
     }
   },
@@ -24,9 +24,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
-    "../src/**/*.ts",
-    "../src/**/*.tsx"
+    ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "vendor"]
 }
