@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { FaqAccordion } from "@/components/marketing/faq-accordion";
 import { LANDING_COPY } from "@landing/content/landing-copy";
@@ -13,7 +14,13 @@ export function FaqSection() {
       className="scroll-mt-20 border-b border-border bg-background py-20 sm:py-28"
     >
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45 }}
+          className="mb-10 text-center"
+        >
           <p className="text-sm font-medium uppercase tracking-wider text-accent">
             {faq.eyebrow}
           </p>
@@ -23,9 +30,14 @@ export function FaqSection() {
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted">
             {faq.description}
           </p>
-        </div>
+        </motion.div>
 
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45, delay: 0.05 }}
+        >
           <FaqAccordion />
           <p className="mt-6 rounded-xl bg-sidebar-active/40 px-4 py-3 text-center text-sm text-muted">
             {faq.footer}{" "}
@@ -36,7 +48,7 @@ export function FaqSection() {
               {faq.footerCta}
             </Link>
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

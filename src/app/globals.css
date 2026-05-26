@@ -101,7 +101,27 @@ body {
   animation: hero-ken-burns 24s ease-in-out infinite alternate;
 }
 
+@keyframes hero-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.hero-marquee-track {
+  animation: hero-marquee 45s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .hero-marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
   .hero-bg-ken-burns {
     animation: none;
   }
@@ -111,5 +131,62 @@ body {
 .hero-copy {
   opacity: 1;
   transform: none;
+}
+
+/* Scale / custom pack volume slider (shared with app billing) */
+.custom-pack-slider::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 9999px;
+  background: transparent;
+}
+
+.custom-pack-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -6px;
+  border-radius: 9999px;
+  border: 2px solid var(--accent);
+  background: var(--surface);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent),
+    0 1px 4px color-mix(in srgb, var(--accent) 28%, transparent);
+  cursor: grab;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+
+.custom-pack-slider:active::-webkit-slider-thumb {
+  cursor: grabbing;
+  transform: scale(1.06);
+}
+
+.custom-pack-slider::-moz-range-track {
+  height: 8px;
+  border-radius: 9999px;
+  background: transparent;
+}
+
+.custom-pack-slider::-moz-range-progress {
+  background: transparent;
+}
+
+.custom-pack-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  border: 2px solid var(--accent);
+  background: var(--surface);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent),
+    0 1px 4px color-mix(in srgb, var(--accent) 28%, transparent);
+  cursor: grab;
+}
+
+.custom-pack-slider:active::-moz-range-thumb {
+  cursor: grabbing;
+  transform: scale(1.06);
 }
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { CdnImage } from "@landing/components/landing/cdn-image";
 import { LANDING_COPY } from "@landing/content/landing-copy";
 import { getFeatureImages, type LandingTemplateImage } from "@landing/content/landing-media";
@@ -62,7 +63,12 @@ export function FeatureSection({
             reversed && "lg:[&>*:first-child]:order-2",
           )}
         >
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.45 }}
+          >
             <p className="text-sm font-medium uppercase tracking-wider text-accent">
               {eyebrow}
             </p>
@@ -77,11 +83,16 @@ export function FeatureSection({
                 {cta}
               </PillButton>
             </div>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.08 }}
+          >
             <FeatureMediaGrid images={images} />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

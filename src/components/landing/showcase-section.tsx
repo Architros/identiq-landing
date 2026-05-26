@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { CdnImage } from "@landing/components/landing/cdn-image";
 import { LANDING_COPY } from "@landing/content/landing-copy";
 import {
@@ -18,7 +19,13 @@ export function ShowcaseSection() {
       className="scroll-mt-20 border-b border-border bg-surface py-20 sm:py-28"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 max-w-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45 }}
+          className="mb-12 max-w-2xl"
+        >
           <p className="text-sm font-medium uppercase tracking-wider text-accent">
             {showcase.eyebrow}
           </p>
@@ -28,9 +35,15 @@ export function ShowcaseSection() {
           <p className="mt-4 text-base leading-relaxed text-muted">
             {showcase.description}
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid h-[min(70vw,420px)] auto-rows-fr grid-cols-4 grid-rows-4 gap-2.5 sm:gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="grid h-[min(70vw,420px)] auto-rows-fr grid-cols-4 grid-rows-4 gap-2.5 sm:gap-3"
+        >
           {images.map((template, index) => (
             <div
               key={template.id}
@@ -47,7 +60,7 @@ export function ShowcaseSection() {
               />
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

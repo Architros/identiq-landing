@@ -94,6 +94,7 @@ function MarqueeTile({
 
 export function HeroImageMarquee({ className }: { className?: string }) {
   const limits = useMarqueeTileLimits();
+  const loop = [...MARQUEE_IMAGES, ...MARQUEE_IMAGES];
 
   return (
     <div
@@ -103,9 +104,9 @@ export function HeroImageMarquee({ className }: { className?: string }) {
       )}
       aria-hidden
     >
-      <div className="flex w-full flex-wrap items-center justify-center gap-4 px-2 py-4 sm:px-4">
-        {MARQUEE_IMAGES.slice(0, 6).map((image) => (
-          <MarqueeTile key={image.id} image={image} limits={limits} />
+      <div className="hero-marquee-track flex w-max items-center gap-4 px-2 sm:px-4">
+        {loop.map((image, index) => (
+          <MarqueeTile key={`${image.id}-${index}`} image={image} limits={limits} />
         ))}
       </div>
     </div>

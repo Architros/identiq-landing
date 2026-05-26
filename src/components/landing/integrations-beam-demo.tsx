@@ -37,7 +37,7 @@ const BRAND_INCLUDES = [
   { icon: Share08Icon, label: "Ad & social sizes" },
 ] as const;
 
-const Circle = forwardRef<
+const PlatformNode = forwardRef<
   HTMLDivElement,
   { className?: string; children?: React.ReactNode }
 >(({ className, children }, ref) => (
@@ -51,7 +51,35 @@ const Circle = forwardRef<
     {children}
   </div>
 ));
-Circle.displayName = "Circle";
+PlatformNode.displayName = "PlatformNode";
+
+const IdentiqHub = forwardRef<
+  HTMLDivElement,
+  { className?: string; children?: React.ReactNode }
+>(({ className, children }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "relative z-10 size-[4.5rem] sm:size-[4.75rem]",
+      className,
+    )}
+  >
+    {/* Cube depth — right & bottom faces */}
+    <span
+      className="absolute inset-0 translate-x-[6px] translate-y-[3px] rounded-md bg-[#d45a1f]"
+      aria-hidden
+    />
+    <span
+      className="absolute inset-0 translate-x-[3px] translate-y-[6px] rounded-md bg-[#b84818]"
+      aria-hidden
+    />
+    {/* Front face */}
+    <div className="relative flex size-full items-center justify-center rounded-md border border-black/10 bg-accent p-2.5 shadow-[0_1px_0_rgba(255,255,255,0.25)_inset,0_6px_16px_rgba(248,110,41,0.45)]">
+      {children}
+    </div>
+  </div>
+));
+IdentiqHub.displayName = "IdentiqHub";
 
 export function IntegrationsBeamDemo() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -161,18 +189,15 @@ export function IntegrationsBeamDemo() {
 
         {/* Identiq hub */}
         <div className="flex shrink-0 flex-col items-center justify-center gap-2 px-1">
-          <Circle
-            ref={identiqRef}
-            className="size-[4.25rem] border-accent/50 bg-surface ring-2 ring-accent/35 sm:size-[4.5rem]"
-          >
+          <IdentiqHub ref={identiqRef}>
             <Image
               src="/brand/logo-identiq.svg"
               alt="Identiq"
               width={40}
               height={40}
-              className="h-10 w-10"
+              className="h-9 w-9 brightness-0 invert"
             />
-          </Circle>
+          </IdentiqHub>
           <span className="font-display text-sm font-medium text-foreground">
             identiq
           </span>
@@ -181,7 +206,7 @@ export function IntegrationsBeamDemo() {
         {/* Platforms */}
         <div className="grid shrink-0 grid-cols-2 gap-2 sm:gap-2.5">
           {PLATFORMS.map((platform, i) => (
-            <Circle
+            <PlatformNode
               key={platform.slug}
               ref={platformRefs[i]}
               className="size-10 bg-white p-2 sm:size-11"
@@ -192,7 +217,7 @@ export function IntegrationsBeamDemo() {
                 alt={platform.label}
                 className="h-full w-full object-contain"
               />
-            </Circle>
+            </PlatformNode>
           ))}
         </div>
       </div>

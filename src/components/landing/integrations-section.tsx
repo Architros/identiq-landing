@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { IntegrationsBeamDemo } from "@landing/components/landing/integrations-beam-demo";
 import { PillButton } from "@landing/components/landing/pill-button";
 import { LANDING_COPY } from "@landing/content/landing-copy";
@@ -11,10 +12,16 @@ export function IntegrationsSection() {
   return (
     <section
       id="channels"
-      className="scroll-mt-20 border-b border-border bg-background py-20 sm:py-28"
+      className="scroll-mt-20 border-b border-border bg-background pt-10 pb-20 sm:pt-14 sm:pb-28"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45 }}
+          className="mb-8 text-center"
+        >
           <p className="text-sm font-medium uppercase tracking-wider text-accent">
             {integrations.eyebrow}
           </p>
@@ -24,9 +31,15 @@ export function IntegrationsSection() {
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted">
             {integrations.description}
           </p>
-        </div>
+        </motion.div>
 
-        <div className="group rounded-[var(--radius-card)] bg-surface p-4 shadow-sm ring-1 ring-border sm:p-6 lg:p-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+          className="group rounded-[var(--radius-card)] bg-surface p-4 shadow-sm ring-1 ring-border sm:p-6 lg:p-8"
+        >
           <div className="max-w-full overflow-x-auto overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:thin] [&::-webkit-scrollbar]:h-1.5">
             <IntegrationsBeamDemo />
           </div>
@@ -48,7 +61,7 @@ export function IntegrationsSection() {
               {integrations.cta}
             </PillButton>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

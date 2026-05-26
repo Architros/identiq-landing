@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { LANDING_COPY } from "@landing/content/landing-copy";
 import { APP_LINKS } from "@landing/lib/app-url";
 import { MouseEffectTexture } from "@landing/components/landing/mouse-effect-dots";
@@ -38,25 +39,35 @@ export function HowItWorks() {
       repulsionStrength={24}
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-14 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45 }}
+          className="mb-14 text-center"
+        >
           <p className="text-sm font-medium uppercase tracking-wider text-accent">
             How it works
           </p>
           <h2 className="mt-3 font-display text-3xl tracking-tight text-foreground sm:text-4xl">
             Three steps to a launch-ready brand
           </h2>
-        </div>
+        </motion.div>
 
         <ol className="grid gap-8 md:grid-cols-3">
-          {STEPS.map((item) => (
-            <li
+          {STEPS.map((item, i) => (
+            <motion.li
               key={item.step}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
               className="rounded-[var(--radius-card)] border border-border/80 bg-surface/85 p-6 shadow-sm backdrop-blur-sm"
             >
               <span className="font-display text-2xl text-accent">{item.step}</span>
               <h3 className="mt-4 text-lg font-medium text-foreground">{item.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{item.description}</p>
-            </li>
+            </motion.li>
           ))}
         </ol>
 
