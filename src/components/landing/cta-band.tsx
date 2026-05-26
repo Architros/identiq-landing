@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { LANDING_COPY } from "@landing/content/landing-copy";
 import { APP_LINKS } from "@landing/lib/app-url";
 import { PillButton } from "@landing/components/landing/pill-button";
@@ -21,13 +20,7 @@ export function CtaBand() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.45 }}
-          className="glass-panel mx-auto max-w-2xl rounded-2xl px-8 py-10 text-center sm:px-10 sm:py-12"
-        >
+        <div className="glass-panel mx-auto max-w-2xl rounded-2xl px-8 py-10 text-center sm:px-10 sm:py-12">
           <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
             {ctaBand.title}
           </h2>
@@ -39,7 +32,7 @@ export function CtaBand() {
               {ctaBand.cta}
             </PillButton>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
