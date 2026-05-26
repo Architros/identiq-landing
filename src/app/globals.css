@@ -4,7 +4,15 @@
 @source "../**/*.{ts,tsx}";
 @import "../styles/theme.css";
 
+/* Single document scroll — avoid html/body height locks that cause double scrollbars */
+html {
+  overflow-x: clip;
+  overflow-y: auto;
+}
+
 body {
+  overflow-x: clip;
+  min-height: 100dvh;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;

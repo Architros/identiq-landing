@@ -34,9 +34,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${displayFont.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${displayFont.variable} antialiased`}
     >
-      <head><link rel="preload" as="image" href="/hero/hiker-misty-mountains.webp" fetchPriority="high" /></head><body className="min-h-full font-sans">{children}</body>
+      <head><link rel="preload" as="image" href="/hero/hiker-misty-mountains.webp" fetchPriority="high" /></head>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }

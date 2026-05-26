@@ -40,7 +40,7 @@ export function IntegrationsSection() {
           transition={{ duration: 0.5, delay: 0.05 }}
           className="group rounded-[var(--radius-card)] bg-surface p-4 shadow-sm ring-1 ring-border sm:p-6 lg:p-8"
         >
-          <div className="overflow-x-auto">
+          <div className="max-w-full overflow-x-auto overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:thin] [&::-webkit-scrollbar]:h-1.5">
             <IntegrationsBeamDemo />
           </div>
 

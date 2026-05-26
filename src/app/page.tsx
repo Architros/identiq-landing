@@ -9,9 +9,9 @@ import { LandingNav } from "@landing/components/landing/landing-nav";
 
 export default function LandingPage() {
   return (
-    <>
+    <div className="overflow-x-clip">
       <LandingNav />
-      <main>
+      <main className="overflow-x-clip">
         <HeroSection />
         <HowItWorks />
         <IntegrationsSection />
@@ -20,6 +20,6 @@ export default function LandingPage() {
         <CtaBand />
       </main>
       <LandingFooter />
-    </>
+    </div>
   );
 }
