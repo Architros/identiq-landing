@@ -11,7 +11,7 @@ export function IntegrationsSection() {
 
   return (
     <section
-      id="integrations"
+      id="channels"
       className="scroll-mt-20 border-b border-border bg-background py-20 sm:py-28"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -40,7 +40,7 @@ export function IntegrationsSection() {
           transition={{ duration: 0.5, delay: 0.05 }}
           className="group rounded-[var(--radius-card)] bg-surface p-4 shadow-sm ring-1 ring-border sm:p-6 lg:p-8"
         >
-          <div className="overflow-x-auto transition-transform duration-300 group-hover:scale-[1.01]">
+          <div className="overflow-x-auto">
             <IntegrationsBeamDemo />
           </div>
 
@@ -53,7 +53,11 @@ export function IntegrationsSection() {
                 {integrations.cardDescription}
               </p>
             </div>
-            <PillButton href={APP_LINKS.startBrand()} variant="accent" className="shrink-0">
+            <PillButton
+              href={APP_LINKS.startBrand()}
+              variant="accent"
+              shellClassName="shrink-0"
+            >
               {integrations.cta}
             </PillButton>
           </div>

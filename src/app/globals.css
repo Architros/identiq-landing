@@ -9,8 +9,74 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
+::selection {
+  background-color: color-mix(in srgb, var(--accent) 88%, transparent);
+  color: var(--on-accent);
+}
+
+::-moz-selection {
+  background-color: color-mix(in srgb, var(--accent) 88%, transparent);
+  color: var(--on-accent);
+}
+
+/** Frosted glass — blur + tint + edge highlights (not blur-only). */
+.glass-panel {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.1) 42%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  -webkit-backdrop-filter: blur(20px) saturate(1.65) brightness(1.08);
+  backdrop-filter: blur(20px) saturate(1.65) brightness(1.08);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.12);
+}
+
 .font-display {
   font-family: var(--font-display), system-ui, sans-serif;
+}
+
+/** Landing nav — scroll-driven --nav-blend (0 = over hero, 1 = over page). */
+.landing-nav {
+  --nav-blend: 0;
+  background-color: color-mix(
+    in srgb,
+    var(--background) calc(var(--nav-blend) * 92%),
+    transparent
+  );
+  border-bottom-color: color-mix(
+    in srgb,
+    var(--border) calc(var(--nav-blend) * 100%),
+    rgba(255, 255, 255, 0.12) calc((1 - var(--nav-blend)) * 100%)
+  );
+  box-shadow: 0 1px 0
+    color-mix(
+      in srgb,
+      rgba(0, 0, 0, 0.06) calc(var(--nav-blend) * 100%),
+      transparent
+    );
+}
+
+.landing-nav .nav-brand {
+  color: color-mix(in srgb, var(--foreground) calc(var(--nav-blend) * 100%), white);
+}
+
+.landing-nav .nav-link,
+.landing-nav .nav-signin {
+  color: color-mix(
+    in srgb,
+    var(--foreground) calc(var(--nav-blend) * 72%),
+    rgba(255, 255, 255, 0.88) calc((1 - var(--nav-blend)) * 100%)
+  );
+}
+
+.landing-nav .nav-link:hover,
+.landing-nav .nav-signin:hover {
+  color: color-mix(in srgb, var(--foreground) calc(var(--nav-blend) * 100%), white);
 }
 
 @keyframes hero-ken-burns {
@@ -46,5 +112,15 @@ body {
     justify-content: center;
     width: 100%;
   }
+
+  .hero-bg-ken-burns {
+    animation: none;
+  }
+}
+
+/* Hero copy must never depend on client JS to become visible */
+.hero-copy {
+  opacity: 1;
+  transform: none;
 }
 

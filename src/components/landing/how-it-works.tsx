@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { LANDING_COPY } from "@landing/content/landing-copy";
 import { APP_LINKS } from "@landing/lib/app-url";
+import { MouseEffectTexture } from "@landing/components/landing/mouse-effect-dots";
 import { PillButton } from "@landing/components/landing/pill-button";
 
 const STEPS = [
@@ -26,10 +28,15 @@ const STEPS = [
 ] as const;
 
 export function HowItWorks() {
+  const { howItWorks } = LANDING_COPY;
+
   return (
-    <section
+    <MouseEffectTexture
       id="how-it-works"
-      className="scroll-mt-20 border-b border-border bg-sidebar-active/40 py-20 sm:py-28"
+      className="scroll-mt-20 border-b border-border py-20 sm:py-28"
+      dotSpacing={20}
+      repulsionRadius={100}
+      repulsionStrength={24}
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -55,7 +62,7 @@ export function HowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="rounded-[var(--radius-card)] border border-border bg-surface p-6"
+              className="rounded-[var(--radius-card)] border border-border/80 bg-surface/85 p-6 shadow-sm backdrop-blur-sm"
             >
               <span className="font-display text-2xl text-accent">{item.step}</span>
               <h3 className="mt-4 text-lg font-medium text-foreground">{item.title}</h3>
@@ -66,10 +73,10 @@ export function HowItWorks() {
 
         <div className="mt-12 flex justify-center">
           <PillButton href={APP_LINKS.startBrand()} variant="accent">
-            Start your brand
+            {howItWorks.cta}
           </PillButton>
         </div>
       </div>
-    </section>
+    </MouseEffectTexture>
   );
 }

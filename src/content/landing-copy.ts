@@ -1,4 +1,13 @@
 export const LANDING_COPY = {
+  nav: {
+    cta: "Get Started",
+    links: [
+      { label: "How it works", href: "#how-it-works" },
+      { label: "Channels", href: "#channels" },
+      { label: "Pricing", href: "#pricing" },
+      { label: "FAQ", href: "#faq" },
+    ],
+  },
   announcement: "Secure the $5 launch offer",
   hero: {
     headline: {
@@ -8,12 +17,15 @@ export const LANDING_COPY = {
     },
     subheadline:
       "Identity, assets, and on-brand campaigns in one system — from first logo to launch.",
-    cta: "Start your brand",
+    cta: "Start branding",
     mediaCard: {
       title: "See what you can ship on day one.",
       linkLabel: "Browse the showcase",
       href: "#showcase",
     },
+  },
+  howItWorks: {
+    cta: "Create your kit",
   },
   logoStrip: {
     label: "Built for teams who need brand consistency at speed",
@@ -58,14 +70,14 @@ export const LANDING_COPY = {
       "Templates and outputs from the Identiq library — swap in your kit and ship.",
   },
   integrations: {
-    eyebrow: "Integrations",
+    eyebrow: "Channels",
     title: "From brand kit to every channel.",
     description:
       "Define your identity in Identiq once — ship on-brand posts and assets to the platforms your team uses.",
     cardTitle: "One brand system, every destination",
     cardDescription:
       "Your colors, logo, and templates flow from a single kit into Instagram, LinkedIn, X, and the rest — ready to publish.",
-    cta: "Start your brand",
+    cta: "Ship everywhere",
     platforms: [
       "instagram",
       "linkedin",
@@ -87,13 +99,14 @@ export const LANDING_COPY = {
     eyebrow: "FAQ",
     title: "Common questions",
     description: "Everything you need to know before you launch your first brand kit.",
-    footer: "Ready to get started?",
-    footerCta: "Start your brand",
+    footer: "Need a plan first?",
+    footerCta: "View pricing",
+    footerCtaHref: "#pricing",
   },
   ctaBand: {
     title: "Ready to build your brand?",
     description:
       "Sign in and launch your first brand kit in minutes. No design files required.",
-    cta: "Get started free",
+    cta: "Sign in to launch",
   },
 } as const;

@@ -2,6 +2,16 @@
 
 import Image from "next/image";
 import { forwardRef, useRef } from "react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  ColorsIcon,
+  Image01Icon,
+  LayoutGridIcon,
+  Megaphone01Icon,
+  Share08Icon,
+  TextIcon,
+  Tick01Icon,
+} from "@hugeicons/core-free-icons";
 import { AnimatedBeam } from "@landing/components/ui/animated-beam";
 import { cn } from "@landing/lib/utils";
 
@@ -16,7 +26,16 @@ const PLATFORMS = [
   { slug: "threads", label: "Threads" },
 ] as const;
 
-const BRAND_SWATCHES = ["#f86e29", "#1c1917", "#ffb07a"] as const;
+const BRAND_SWATCHES = ["#f86e29", "#1c1917", "#ffb07a", "#fafaf9"] as const;
+
+const BRAND_INCLUDES = [
+  { icon: ColorsIcon, label: "Color palette" },
+  { icon: TextIcon, label: "Typography" },
+  { icon: Megaphone01Icon, label: "Brand voice" },
+  { icon: LayoutGridIcon, label: "Templates" },
+  { icon: Image01Icon, label: "Logo assets" },
+  { icon: Share08Icon, label: "Ad & social sizes" },
+] as const;
 
 const Circle = forwardRef<
   HTMLDivElement,
@@ -25,7 +44,7 @@ const Circle = forwardRef<
   <div
     ref={ref}
     className={cn(
-      "z-10 flex size-12 items-center justify-center rounded-full border-2 border-border bg-surface p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]",
+      "z-10 flex size-12 items-center justify-center rounded-full border-2 border-border bg-surface p-2.5 shadow-sm",
       className,
     )}
   >
@@ -60,68 +79,112 @@ export function IntegrationsBeamDemo() {
 
   return (
     <div
-      className={cn(
-        "relative flex h-[500px] w-full items-center justify-center overflow-hidden p-6 sm:p-10",
-        "[mask-image:linear-gradient(to_top,transparent_10%,#000_100%)]",
-      )}
       ref={containerRef}
+      className="relative flex min-h-[34rem] w-full min-w-[42rem] items-center justify-center overflow-visible px-2 py-6 sm:min-w-[46rem] sm:px-6 sm:py-8"
     >
-      <div className="flex size-full min-w-[36rem] max-w-3xl flex-row items-stretch justify-between gap-8 sm:gap-10">
-        <div className="flex flex-col justify-center">
-          <div ref={brandRef} className="z-10 flex flex-col items-center gap-2">
-            <div className="w-full max-w-[11rem] rounded-[var(--radius-card)] border border-border bg-surface p-4 shadow-sm">
-              <div className="flex items-center gap-2.5">
-                <Image
-                  src="/brand/logo-identiq.svg"
-                  alt=""
-                  width={32}
-                  height={32}
-                  className="h-8 w-8"
-                />
-                <div>
-                  <p className="text-sm font-medium text-foreground">Northline</p>
-                  <p className="text-[10px] uppercase tracking-wide text-muted">
-                    Your brand kit
-                  </p>
-                </div>
-              </div>
-              <div className="mt-3 flex gap-1.5">
-                {BRAND_SWATCHES.map((color) => (
-                  <span
-                    key={color}
-                    className="h-5 w-5 rounded-full ring-1 ring-border"
-                    style={{ backgroundColor: color }}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col justify-center">
-          <div className="flex flex-col items-center gap-2">
-            <Circle
-              ref={identiqRef}
-              className="size-16 border-accent/40 bg-surface ring-2 ring-accent/30"
-            >
+      <div className="flex w-full max-w-4xl items-center justify-between gap-3 sm:gap-5">
+        <div
+          ref={brandRef}
+          className="z-10 w-[11.5rem] shrink-0 sm:w-[13rem]"
+        >
+            <div className="rounded-[var(--radius-card)] border border-border bg-background p-3.5 shadow-sm ring-1 ring-border/80 sm:p-4">
+              <div className="flex items-center gap-2.5 border-b border-border pb-3">
               <Image
                 src="/brand/logo-identiq.svg"
                 alt=""
                 width={36}
                 height={36}
-                className="h-9 w-9"
+                className="h-9 w-9 shrink-0"
               />
-            </Circle>
-            <span className="font-display text-sm text-foreground">identiq</span>
-          </div>
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-foreground">
+                  Northline
+                </p>
+                <p className="text-[10px] font-medium uppercase tracking-wide text-muted">
+                  Your brand kit
+                </p>
+              </div>
+            </div>
+
+            <ul className="mt-3 space-y-1.5" aria-label="Included in your brand kit">
+              {BRAND_INCLUDES.map(({ icon, label }) => (
+                <li
+                  key={label}
+                  className="flex items-center gap-2 rounded-lg bg-surface px-2 py-1.5 text-xs text-foreground ring-1 ring-border/60"
+                >
+                  <HugeiconsIcon
+                    icon={icon}
+                    size={14}
+                    color="currentColor"
+                    strokeWidth={2}
+                    className="shrink-0 text-accent"
+                  />
+                  <span className="leading-tight">{label}</span>
+                  <HugeiconsIcon
+                    icon={Tick01Icon}
+                    size={12}
+                    color="currentColor"
+                    strokeWidth={2}
+                    className="ml-auto shrink-0 text-accent"
+                  />
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-3 border-t border-border pt-3">
+              <p className="text-[10px] font-medium uppercase tracking-wide text-muted">
+                Palette
+              </p>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {BRAND_SWATCHES.map((color) => (
+                  <span
+                    key={color}
+                    className="h-6 w-6 rounded-full ring-1 ring-border"
+                    style={{ backgroundColor: color }}
+                    title={color}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-3 border-t border-border pt-3">
+              <p className="text-[10px] font-medium uppercase tracking-wide text-muted">
+                Type
+              </p>
+              <p className="mt-1 font-display text-2xl leading-none text-foreground">
+                Aa
+              </p>
+              <p className="mt-0.5 text-[10px] text-muted">Display · Geist Sans</p>
+            </div>
+            </div>
         </div>
 
-        <div className="flex flex-col justify-center gap-2">
+        {/* Identiq hub */}
+        <div className="flex shrink-0 flex-col items-center justify-center gap-2 px-1">
+          <Circle
+            ref={identiqRef}
+            className="size-[4.25rem] border-accent/50 bg-surface ring-2 ring-accent/35 sm:size-[4.5rem]"
+          >
+            <Image
+              src="/brand/logo-identiq.svg"
+              alt="Identiq"
+              width={40}
+              height={40}
+              className="h-10 w-10"
+            />
+          </Circle>
+          <span className="font-display text-sm font-medium text-foreground">
+            identiq
+          </span>
+        </div>
+
+        {/* Platforms */}
+        <div className="grid shrink-0 grid-cols-2 gap-2 sm:gap-2.5">
           {PLATFORMS.map((platform, i) => (
             <Circle
               key={platform.slug}
               ref={platformRefs[i]}
-              className="size-10 border-border/80 bg-white p-2"
+              className="size-10 bg-white p-2 sm:size-11"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -134,25 +197,32 @@ export function IntegrationsBeamDemo() {
         </div>
       </div>
 
+      <AnimatedBeam
+        containerRef={containerRef}
+        fromRef={brandRef}
+        toRef={identiqRef}
+        duration={3.5}
+        curvature={0}
+        pathColor="#d6d3d1"
+        pathOpacity={0.45}
+        pathWidth={2.5}
+        startXOffset={12}
+        endXOffset={-6}
+      />
       {PLATFORMS.map((platform, i) => (
         <AnimatedBeam
           key={platform.slug}
           containerRef={containerRef}
-          fromRef={platformRefs[i]}
-          toRef={identiqRef}
+          fromRef={identiqRef}
+          toRef={platformRefs[i]}
           duration={3}
+          curvature={20 + (i % 3) * 12}
           pathColor="#d6d3d1"
-          pathOpacity={0.25}
+          pathOpacity={0.4}
+          pathWidth={2}
+          startXOffset={8}
         />
       ))}
-      <AnimatedBeam
-        containerRef={containerRef}
-        fromRef={identiqRef}
-        toRef={brandRef}
-        duration={3}
-        pathColor="#d6d3d1"
-        pathOpacity={0.25}
-      />
     </div>
   );
 }

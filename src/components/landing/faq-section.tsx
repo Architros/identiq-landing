@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { FaqAccordion } from "@/components/marketing/faq-accordion";
 import { LANDING_COPY } from "@landing/content/landing-copy";
-import { APP_LINKS } from "@landing/lib/app-url";
 
 export function FaqSection() {
   const { faq } = LANDING_COPY;
@@ -43,7 +42,7 @@ export function FaqSection() {
           <p className="mt-6 rounded-xl bg-sidebar-active/40 px-4 py-3 text-center text-sm text-muted">
             {faq.footer}{" "}
             <Link
-              href={APP_LINKS.startBrand()}
+              href={faq.footerCtaHref}
               className="font-medium text-accent hover:underline"
             >
               {faq.footerCta}
