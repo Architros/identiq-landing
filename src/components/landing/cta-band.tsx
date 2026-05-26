@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { LANDING_COPY } from "@/content/landing-copy";
-import { APP_LINKS } from "@/lib/app-url";
-import { PillButton } from "@/components/landing/pill-button";
+import { LANDING_COPY } from "@landing/content/landing-copy";
+import { APP_LINKS } from "@landing/lib/app-url";
+import { PillButton } from "@landing/components/landing/pill-button";
 
 export function CtaBand() {
   const { ctaBand } = LANDING_COPY;

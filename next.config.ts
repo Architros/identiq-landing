@@ -1,21 +1,30 @@
 import type { NextConfig } from "next";
-import path from "path";
-import { fileURLToPath } from "url";
 
-const projectRoot = path.dirname(fileURLToPath(import.meta.url));
+import path from "node:path";
+
+const projectDir = __dirname;
 
 const nextConfig: NextConfig = {
-  turbopack: {
-    root: projectRoot,
+  outputFileTracingRoot: path.join(projectDir, ".."),
+  experimental: {
+    externalDir: true,
   },
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "assets.tryidentiq.com",
-        pathname: "/**",
-      },
-    ],
+  turbopack: {
+    resolveAlias: {
+      "@": "../src",
+      "@landing": "./src",
+    },
+  },
+  webpack: (config) => {
+    const path = require("node:path") as typeof import("node:path");
+    const projectDir = __dirname;
+    config.resolve ??= {};
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "@": path.join(projectDir, "../src"),
+      "@landing": path.join(projectDir, "src"),
+    };
+    return config;
   },
 };
 

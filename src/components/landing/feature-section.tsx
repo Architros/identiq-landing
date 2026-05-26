@@ -1,12 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CdnImage } from "@/components/landing/cdn-image";
-import { LANDING_COPY } from "@/content/landing-copy";
-import { getFeatureImages, type LandingTemplateImage } from "@/content/landing-media";
-import { APP_LINKS } from "@/lib/app-url";
-import { cn } from "@/lib/utils";
-import { PillButton } from "@/components/landing/pill-button";
+import { CdnImage } from "@landing/components/landing/cdn-image";
+import { LANDING_COPY } from "@landing/content/landing-copy";
+import { getFeatureImages, type LandingTemplateImage } from "@landing/content/landing-media";
+import { APP_LINKS } from "@landing/lib/app-url";
+import { cn } from "@landing/lib/utils";
+import { PillButton } from "@landing/components/landing/pill-button";
 
 type FeatureSectionProps = {
   id: string;

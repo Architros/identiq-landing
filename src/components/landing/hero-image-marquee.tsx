@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CdnImage } from "@/components/landing/cdn-image";
+import { CdnImage } from "@landing/components/landing/cdn-image";
 import {
   LANDING_TEMPLATE_IMAGES,
   type LandingTemplateImage,
-} from "@/content/landing-media";
-import { cn } from "@/lib/utils";
+} from "@landing/content/landing-media";
+import { cn } from "@landing/lib/utils";
 
 const MARQUEE_IMAGES = LANDING_TEMPLATE_IMAGES.slice(0, 10);
 

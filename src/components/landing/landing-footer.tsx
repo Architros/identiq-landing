@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { APP_LINKS } from "@/lib/app-url";
+import { APP_LINKS } from "@landing/lib/app-url";
 
 const COPYRIGHT_YEAR = new Date().getFullYear();
 

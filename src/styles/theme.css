@@ -17,6 +17,19 @@
 
   --border: #e5e7eb;
 
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --destructive-muted: #fef2f2;
+  --destructive-border: #fecaca;
+  --destructive-text: #b91c1c;
+  --destructive-text-subtle: #991b1b;
+
+  --success: #059669;
+  --success-muted: #ecfdf5;
+  --success-border: #a7f3d0;
+  --success-text: #064e3b;
+  --success-text-subtle: #065f46;
+
   --radius-card: 14px;
   --radius-button: 10px;
 }
@@ -25,11 +38,24 @@
   --color-background: var(--background);
   --color-surface: var(--surface);
   --color-sidebar-active: var(--sidebar-active);
+  --color-input: var(--input);
+  --color-input-hover: var(--input-hover);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-on-accent: var(--on-accent);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-muted: var(--destructive-muted);
+  --color-destructive-border: var(--destructive-border);
+  --color-destructive-text: var(--destructive-text);
+  --color-destructive-text-subtle: var(--destructive-text-subtle);
+  --color-success: var(--success);
+  --color-success-muted: var(--success-muted);
+  --color-success-border: var(--success-border);
+  --color-success-text: var(--success-text);
+  --color-success-text-subtle: var(--success-text-subtle);
   --font-sans: var(--font-geist-sans);
   --radius-card: var(--radius-card);
   --radius-button: var(--radius-button);

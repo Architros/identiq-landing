@@ -15,7 +15,8 @@
     "incremental": true,
     "plugins": [{ "name": "next" }],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["../src/*"],
+      "@landing/*": ["./src/*"]
     }
   },
   "include": [
@@ -23,7 +24,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    "../src/**/*.ts",
+    "../src/**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }

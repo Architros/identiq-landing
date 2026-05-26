@@ -1,9 +1,11 @@
 const DEFAULT_APP_URL = "https://app.tryidentiq.com";
+const DEV_APP_URL = "http://localhost:3000";
 
 export function getAppBaseUrl(): string {
   const raw = process.env.NEXT_PUBLIC_APP_URL?.trim();
-  if (!raw) return DEFAULT_APP_URL;
-  return raw.replace(/\/$/, "");
+  if (raw) return raw.replace(/\/$/, "");
+  if (process.env.NODE_ENV === "development") return DEV_APP_URL;
+  return DEFAULT_APP_URL;
 }
 
 export function appUrl(path: string): string {

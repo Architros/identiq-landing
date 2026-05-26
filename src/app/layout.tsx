@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { displayFont, geistSans } from "@/lib/fonts";
+import { displayFont, geistSans } from "@landing/lib/fonts";
 import "./globals.css";
 
 const siteUrl =
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
       "Build your brand kit, remix premium templates, and ship on-brand assets with AI.",
     images: [
       {
-        url: "/hero/hiker-misty-mountains.png",
+        url: "/hero/hiker-misty-mountains.webp",
         width: 1920,
         height: 1080,
         alt: "identiq",
@@ -36,7 +36,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${displayFont.variable} h-full antialiased`}
     >
-      <body className="min-h-full font-sans">{children}</body>
+      <head><link rel="preload" as="image" href="/hero/hiker-misty-mountains.webp" fetchPriority="high" /></head><body className="min-h-full font-sans">{children}</body>
     </html>
   );
 }

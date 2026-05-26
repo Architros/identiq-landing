@@ -1,7 +1,7 @@
 "use client";
 
-import { HeroImageMarquee } from "@/components/landing/hero-image-marquee";
-import { ProgressiveBlur } from "@/components/landing/progressive-blur";
+import { HeroImageMarquee } from "@landing/components/landing/hero-image-marquee";
+import { ProgressiveBlur } from "@landing/components/landing/progressive-blur";
 
 export function HeroShowcaseStage() {
   return (

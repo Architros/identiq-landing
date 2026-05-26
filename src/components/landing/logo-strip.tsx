@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { LANDING_COPY } from "@/content/landing-copy";
+import { LANDING_COPY } from "@landing/content/landing-copy";
 
 export function LogoStrip() {
   const { logoStrip } = LANDING_COPY;

@@ -1,8 +1,11 @@
-import { CtaBand } from "@/components/landing/cta-band";
-import { HeroSection } from "@/components/landing/hero-section";
-import { HowItWorks } from "@/components/landing/how-it-works";
-import { LandingFooter } from "@/components/landing/landing-footer";
-import { LandingNav } from "@/components/landing/landing-nav";
+import { CtaBand } from "@landing/components/landing/cta-band";
+import { FaqSection } from "@landing/components/landing/faq-section";
+import { HeroSection } from "@landing/components/landing/hero-section";
+import { HowItWorks } from "@landing/components/landing/how-it-works";
+import { IntegrationsSection } from "@landing/components/landing/integrations-section";
+import { PricingSection } from "@landing/components/landing/pricing-section";
+import { LandingFooter } from "@landing/components/landing/landing-footer";
+import { LandingNav } from "@landing/components/landing/landing-nav";
 
 export default function LandingPage() {
   return (
@@ -11,6 +14,9 @@ export default function LandingPage() {
       <main>
         <HeroSection />
         <HowItWorks />
+        <IntegrationsSection />
+        <PricingSection />
+        <FaqSection />
         <CtaBand />
       </main>
       <LandingFooter />

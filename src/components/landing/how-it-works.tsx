@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { APP_LINKS } from "@/lib/app-url";
-import { PillButton } from "@/components/landing/pill-button";
+import { APP_LINKS } from "@landing/lib/app-url";
+import { PillButton } from "@landing/components/landing/pill-button";
 
 const STEPS = [
   {

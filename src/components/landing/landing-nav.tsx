@@ -3,11 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { APP_LINKS } from "@/lib/app-url";
-import { cn } from "@/lib/utils";
-import { PillButton } from "@/components/landing/pill-button";
+import { APP_LINKS } from "@landing/lib/app-url";
+import { cn } from "@landing/lib/utils";
+import { PillButton } from "@landing/components/landing/pill-button";
 
-const NAV_LINKS = [{ label: "How it works", href: "#how-it-works" }] as const;
+const NAV_LINKS = [
+  { label: "How it works", href: "#how-it-works" },
+  { label: "Integrations", href: "#integrations" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "FAQ", href: "#faq" },
+] as const;
 
 export function LandingNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -31,16 +36,17 @@ export function LandingNav() {
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="flex items-center gap-2.5 text-white transition-opacity hover:opacity-90"
+          className="flex items-center gap-3 text-white transition-opacity hover:opacity-90"
         >
           <Image
-            src="/brand/logo-icon.svg"
+            src="/brand/logo-identiq.svg"
             alt=""
-            width={28}
-            height={28}
-            className="h-7 w-7"
+            width={40}
+            height={29}
+            className="h-9 w-auto"
+            priority
           />
-          <span className="font-display text-lg tracking-tight">identiq</span>
+          <span className="font-display text-xl tracking-tight">identiq</span>
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">

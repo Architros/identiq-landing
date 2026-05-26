@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { HeroShowcaseStage } from "@/components/landing/hero-showcase-stage";
+import { HeroShowcaseStage } from "@landing/components/landing/hero-showcase-stage";
 import { motion } from "framer-motion";
-import { LANDING_COPY } from "@/content/landing-copy";
-import { APP_LINKS } from "@/lib/app-url";
-import { PillButton } from "@/components/landing/pill-button";
+import { LANDING_COPY } from "@landing/content/landing-copy";
+import { APP_LINKS } from "@landing/lib/app-url";
+import { PillButton } from "@landing/components/landing/pill-button";
 
-const HERO_BG = "/hero/hiker-misty-mountains.png";
+const HERO_BG = "/hero/hiker-misty-mountains.webp";
 
 export function HeroSection() {
   const { hero, announcement } = LANDING_COPY;
@@ -48,7 +48,7 @@ export function HeroSection() {
             <span className="text-accent">{hero.headline.highlight}</span>
             {hero.headline.after}
           </h1>
-          <p className="mt-5 max-w-lg text-base leading-relaxed text-white/90 sm:text-lg">
+          <p className="mt-5 max-w-lg text-base font-light leading-relaxed text-white/90 sm:text-lg">
             {hero.subheadline}
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

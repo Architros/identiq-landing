@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CdnImage } from "@/components/landing/cdn-image";
-import { LANDING_COPY } from "@/content/landing-copy";
+import { CdnImage } from "@landing/components/landing/cdn-image";
+import { LANDING_COPY } from "@landing/content/landing-copy";
 import {
   getShowcaseImages,
   SHOWCASE_COLLAGE_LAYOUT,
-} from "@/content/landing-media";
-import { cn } from "@/lib/utils";
+} from "@landing/content/landing-media";
+import { cn } from "@landing/lib/utils";
 
 export function ShowcaseSection() {
   const { showcase } = LANDING_COPY;

@@ -1,5 +1,5 @@
 export const LANDING_COPY = {
-  announcement: "AI brand system — from logo to launch-ready assets",
+  announcement: "Secure the $5 launch offer",
   hero: {
     headline: {
       before: "The ",
@@ -56,6 +56,39 @@ export const LANDING_COPY = {
     title: "Campaign-ready assets, generated with your brand.",
     description:
       "Templates and outputs from the Identiq library — swap in your kit and ship.",
+  },
+  integrations: {
+    eyebrow: "Integrations",
+    title: "From brand kit to every channel.",
+    description:
+      "Define your identity in Identiq once — ship on-brand posts and assets to the platforms your team uses.",
+    cardTitle: "One brand system, every destination",
+    cardDescription:
+      "Your colors, logo, and templates flow from a single kit into Instagram, LinkedIn, X, and the rest — ready to publish.",
+    cta: "Start your brand",
+    platforms: [
+      "instagram",
+      "linkedin",
+      "x",
+      "facebook",
+      "tiktok",
+      "youtube",
+      "pinterest",
+      "threads",
+    ],
+  },
+  pricing: {
+    eyebrow: "Pricing",
+    title: "Plans that scale with your brand output.",
+    description:
+      "Same packs and token amounts as in the app — pick a plan after you sign in and checkout securely with Stripe.",
+  },
+  faq: {
+    eyebrow: "FAQ",
+    title: "Common questions",
+    description: "Everything you need to know before you launch your first brand kit.",
+    footer: "Ready to get started?",
+    footerCta: "Start your brand",
   },
   ctaBand: {
     title: "Ready to build your brand?",
