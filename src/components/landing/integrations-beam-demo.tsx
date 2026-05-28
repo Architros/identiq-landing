@@ -64,7 +64,6 @@ const IdentiqHub = forwardRef<
       className,
     )}
   >
-    {/* Cube depth — right & bottom faces */}
     <span
       className="absolute inset-0 translate-x-[6px] translate-y-[3px] rounded-md bg-[#d45a1f]"
       aria-hidden
@@ -73,7 +72,6 @@ const IdentiqHub = forwardRef<
       className="absolute inset-0 translate-x-[3px] translate-y-[6px] rounded-md bg-[#b84818]"
       aria-hidden
     />
-    {/* Front face */}
     <div className="relative flex size-full items-center justify-center rounded-md border border-black/10 bg-accent p-2.5 shadow-[0_1px_0_rgba(255,255,255,0.25)_inset,0_6px_16px_rgba(248,110,41,0.45)]">
       {children}
     </div>
@@ -84,6 +82,7 @@ IdentiqHub.displayName = "IdentiqHub";
 export function IntegrationsBeamDemo() {
   const containerRef = useRef<HTMLDivElement>(null);
   const brandRef = useRef<HTMLDivElement>(null);
+  const brandOutRef = useRef<HTMLDivElement>(null);
   const identiqRef = useRef<HTMLDivElement>(null);
   const platform1Ref = useRef<HTMLDivElement>(null);
   const platform2Ref = useRef<HTMLDivElement>(null);
@@ -115,8 +114,13 @@ export function IntegrationsBeamDemo() {
           ref={brandRef}
           className="z-10 w-[11.5rem] shrink-0 sm:w-[13rem]"
         >
-            <div className="rounded-[var(--radius-card)] border border-border bg-background p-3.5 shadow-sm ring-1 ring-border/80 sm:p-4">
-              <div className="flex items-center gap-2.5 border-b border-border pb-3">
+          <div className="relative rounded-[var(--radius-card)] border border-border p-3.5 ring-1 ring-border/80 sm:p-4">
+            <div
+              ref={brandOutRef}
+              className="pointer-events-none absolute right-0 top-1/2 h-0.5 w-0.5 -translate-y-1/2"
+              aria-hidden
+            />
+            <div className="flex items-center gap-2.5 border-b border-border pb-3">
               <Image
                 src="/brand/logo-identiq.svg"
                 alt=""
@@ -134,7 +138,10 @@ export function IntegrationsBeamDemo() {
               </div>
             </div>
 
-            <ul className="mt-3 space-y-1.5" aria-label="Included in your brand kit">
+            <ul
+              className="mt-3 space-y-1.5"
+              aria-label="Included in your brand kit"
+            >
               {BRAND_INCLUDES.map(({ icon, label }) => (
                 <li
                   key={label}
@@ -182,12 +189,13 @@ export function IntegrationsBeamDemo() {
               <p className="mt-1 font-display text-2xl leading-none text-foreground">
                 Aa
               </p>
-              <p className="mt-0.5 text-[10px] text-muted">Display · Geist Sans</p>
+              <p className="mt-0.5 text-[10px] text-muted">
+                Display · Geist Sans
+              </p>
             </div>
-            </div>
+          </div>
         </div>
 
-        {/* Identiq hub */}
         <div className="flex shrink-0 flex-col items-center justify-center gap-2 px-1">
           <IdentiqHub ref={identiqRef}>
             <Image
@@ -203,7 +211,6 @@ export function IntegrationsBeamDemo() {
           </span>
         </div>
 
-        {/* Platforms */}
         <div className="grid shrink-0 grid-cols-2 gap-2 sm:gap-2.5">
           {PLATFORMS.map((platform, i) => (
             <PlatformNode
@@ -224,15 +231,15 @@ export function IntegrationsBeamDemo() {
 
       <AnimatedBeam
         containerRef={containerRef}
-        fromRef={brandRef}
+        fromRef={brandOutRef}
         toRef={identiqRef}
         duration={3.5}
         curvature={0}
         pathColor="#d6d3d1"
         pathOpacity={0.45}
         pathWidth={2.5}
-        startXOffset={12}
-        endXOffset={-6}
+        startXOffset={0}
+        endXOffset={0}
       />
       {PLATFORMS.map((platform, i) => (
         <AnimatedBeam

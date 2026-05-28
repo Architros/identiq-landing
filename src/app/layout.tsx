@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   title: "identiq — AI Brand System",
   description:
     "Build your brand kit, remix premium templates, and ship on-brand assets with AI.",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
   openGraph: {
     title: "identiq — AI Brand System",
     description:
