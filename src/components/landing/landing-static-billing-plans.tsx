@@ -51,7 +51,7 @@ export function LandingStaticBillingPlans({ className }: LandingStaticBillingPla
         className,
       )}
     >
-      <div className="flex justify-center sm:justify-start">
+      <div className="flex justify-center">
         <BillingIntervalToggle value={interval} onChange={setInterval} />
       </div>
 
