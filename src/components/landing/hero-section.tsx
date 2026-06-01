@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { HeroShowcaseStage } from "@landing/components/landing/hero-showcase-stage";
+import { BrandRegisterForm } from "@landing/components/landing/brand-register-form";
 import { LANDING_COPY } from "@landing/content/landing-copy";
 import { APP_LINKS } from "@landing/lib/app-url";
-import { PillButton } from "@landing/components/landing/pill-button";
 
 const HERO_BG = "/hero/hiker-misty-mountains.webp";
 
@@ -44,15 +44,17 @@ export function HeroSection() {
           <p className="mt-5 max-w-lg text-base font-light leading-relaxed text-white/90 sm:text-lg">
             {hero.subheadline}
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <PillButton href={APP_LINKS.startBrand()} variant="hero">
-              {hero.cta}
-            </PillButton>
+          <div className="mt-8 flex w-full justify-center">
+            <BrandRegisterForm
+              placeholder={hero.registerPlaceholder}
+              submitLabel={hero.registerCta}
+              variant="hero"
+            />
           </div>
         </div>
       </div>
 
-      <aside className="relative z-10 mt-10 w-full shrink-0 pb-28">
+      <aside className="relative z-10 mt-6 w-full shrink-0 pb-12 sm:pb-16">
         <HeroShowcaseStage />
       </aside>
     </section>

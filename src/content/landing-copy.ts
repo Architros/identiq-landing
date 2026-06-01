@@ -17,7 +17,8 @@ export const LANDING_COPY = {
     },
     subheadline:
       "Identity, assets, and on-brand campaigns in one system — from first logo to launch.",
-    cta: "Start branding",
+    registerPlaceholder: "Register your brand",
+    registerCta: "Create brand",
     mediaCard: {
       title: "See what you can ship on day one.",
       linkLabel: "Browse the showcase",

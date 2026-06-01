@@ -23,6 +23,13 @@ export const LANDING_TEMPLATE_IMAGES: LandingTemplateImage[] = [
   { id: "7a74d42d-c1ff-4156-a11f-5c75cdf53430", imageUrl: `${LOCAL_IMAGE_ROOT}/7a74d42d-c1ff-4156-a11f-5c75cdf53430.webp`, width: 1536, height: 1024 },
 ];
 
+/** Hero marquee strip — first 10 templates with one swap for visual variety. */
+export const HERO_MARQUEE_IMAGES: LandingTemplateImage[] = [
+  ...LANDING_TEMPLATE_IMAGES.slice(0, 7),
+  LANDING_TEMPLATE_IMAGES[11],
+  ...LANDING_TEMPLATE_IMAGES.slice(8, 10),
+];
+
 export const SHOWCASE_COLLAGE_LAYOUT = [
   "col-span-2 row-span-2",
   "row-span-2",

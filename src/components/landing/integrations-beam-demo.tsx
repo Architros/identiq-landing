@@ -107,7 +107,7 @@ export function IntegrationsBeamDemo() {
   return (
     <div
       ref={containerRef}
-      className="relative flex min-h-[34rem] w-full min-w-[42rem] items-center justify-center overflow-visible px-2 py-6 sm:min-w-[46rem] sm:px-6 sm:py-8"
+      className="relative flex min-h-[34rem] w-full min-w-[42rem] items-center justify-center overflow-visible px-2 pt-6 pb-2 sm:min-w-[46rem] sm:px-6 sm:pt-8 sm:pb-2"
     >
       <div className="flex w-full max-w-4xl items-center justify-between gap-3 sm:gap-5">
         <div

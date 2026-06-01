@@ -45,12 +45,7 @@ export function LandingStaticBillingPlans({ className }: LandingStaticBillingPla
   }, []);
 
   return (
-    <section
-      className={cn(
-        "overflow-visible rounded-2xl border border-border bg-surface p-6 sm:p-8",
-        className,
-      )}
-    >
+    <div className={cn("overflow-visible", className)}>
       <div className="flex justify-center">
         <BillingIntervalToggle value={interval} onChange={setInterval} />
       </div>
@@ -83,6 +78,6 @@ export function LandingStaticBillingPlans({ className }: LandingStaticBillingPla
           onBuy={() => redirectToApp()}
         />
       )}
-    </section>
+    </div>
   );
 }

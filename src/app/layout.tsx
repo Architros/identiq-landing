@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { displayFont, geistSans } from "@landing/lib/fonts";
+import { HERO_MARQUEE_IMAGES } from "@landing/content/landing-media";
 import "./globals.css";
 
 const siteUrl =
@@ -41,7 +42,23 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${displayFont.variable} antialiased`}
     >
-      <head><link rel="preload" as="image" href="/hero/hiker-misty-mountains.webp" fetchPriority="high" /></head>
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/hero/hiker-misty-mountains.webp"
+          fetchPriority="high"
+        />
+        {HERO_MARQUEE_IMAGES.map((image, index) => (
+          <link
+            key={image.id}
+            rel="preload"
+            as="image"
+            href={image.imageUrl}
+            fetchPriority={index < 4 ? "high" : "auto"}
+          />
+        ))}
+      </head>
       <body className="font-sans">{children}</body>
     </html>
   );
