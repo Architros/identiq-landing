@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { displayFont, geistSans } from "@landing/lib/fonts";
 import { HERO_MARQUEE_IMAGES } from "@landing/content/landing-media";
 import "./globals.css";
@@ -59,7 +60,10 @@ export default function RootLayout({
           />
         ))}
       </head>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
