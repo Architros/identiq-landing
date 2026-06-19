@@ -1,6 +1,6 @@
 /**
  * Vercel / standalone landing builds clone the main identiq app for shared @/ imports.
- * In the monorepo (../src present), cloning is skipped unless VERCEL=1.
+ * In the monorepo (../src present), cloning is skipped — @/ resolves to ../src.
  */
 import { execSync } from "node:child_process";
 import { existsSync, rmSync } from "node:fs";
@@ -23,7 +23,7 @@ function vendorIsComplete() {
   );
 }
 
-if (existsSync(siblingSrc) && !isVercel) {
+if (existsSync(siblingSrc)) {
   console.log("[sync-identiq-app] Monorepo ../src detected — skipping clone.");
   process.exit(0);
 }
