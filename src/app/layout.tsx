@@ -22,14 +22,22 @@ export const metadata: Metadata = {
     title: "identiq — AI Brand System",
     description:
       "Build your brand kit, remix premium templates, and ship on-brand assets with AI.",
+    type: "website",
     images: [
       {
-        url: "/hero/hiker-misty-mountains.webp",
-        width: 1920,
-        height: 1080,
-        alt: "identiq",
+        url: "/thumbnail.png",
+        width: 500,
+        height: 274,
+        alt: "identiq — Generate Everything On-brand",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "identiq — AI Brand System",
+    description:
+      "Build your brand kit, remix premium templates, and ship on-brand assets with AI.",
+    images: ["/thumbnail.png"],
   },
 };
 
