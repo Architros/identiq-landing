@@ -94,7 +94,7 @@ export const LANDING_COPY = {
     eyebrow: "Pricing",
     title: "Plans that scale with your brand output.",
     description:
-      "Same packs and token amounts as in the app — pick a plan after you sign in and checkout securely with Stripe.",
+      "Starter from $9/mo with token packs matched to the app — sign in and checkout securely with Stripe. Unused tokens expire each billing period.",
   },
   faq: {
     eyebrow: "FAQ",

@@ -9,7 +9,6 @@ import { setTimeout } from "node:timers/promises";
 import { fileURLToPath } from "node:url";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const isVercel = process.env.VERCEL === "1";
 const siblingSrc = path.join(root, "../src/components");
 const vendorRoot = path.join(root, "vendor/identiq");
 const vendorSrc = path.join(vendorRoot, "src/components");
@@ -24,16 +23,16 @@ function vendorIsComplete() {
 }
 
 if (existsSync(siblingSrc)) {
-  console.log("[sync-identiq-app] Monorepo ../src detected — skipping clone.");
+  console.log(
+    "[sync-identiq-app] Monorepo ../src detected — using live app sources (no clone).",
+  );
   process.exit(0);
 }
 
-if (existsSync(vendorRoot) && (!vendorIsComplete() || isVercel)) {
+// Always refresh vendor on build so pricing/catalog match identiq main (never skip).
+if (existsSync(vendorRoot)) {
   console.log("[sync-identiq-app] Refreshing vendor/identiq…");
   rmSync(vendorRoot, { recursive: true, force: true });
-} else if (vendorIsComplete()) {
-  console.log("[sync-identiq-app] vendor/identiq is up to date — skipping clone.");
-  process.exit(0);
 }
 
 const ref = process.env.IDENTIQ_APP_REF?.trim() || "main";
