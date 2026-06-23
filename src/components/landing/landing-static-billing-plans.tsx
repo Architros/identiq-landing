@@ -5,9 +5,12 @@ import { BillingIntervalToggle } from "@/components/billing/billing-interval-tog
 import { PlanPackCard } from "@/components/billing/plan-pack-card";
 import { CustomPackTeaserCard } from "@/components/billing/custom-pack-teaser-card";
 import { CustomPackDetailView } from "@/components/billing/custom-pack-detail-view";
+import { WelcomeOfferBanner } from "@/components/billing/welcome-offer-banner";
 import {
+  formatUsd,
   listDisplayPacks,
   toDisplayPack,
+  WELCOME_PACK,
   type BillingInterval,
 } from "@/lib/billing/plan-catalog";
 import { CUSTOM_PACK_TIERS } from "@/lib/billing/custom-pack-pricing";
@@ -44,9 +47,22 @@ export function LandingStaticBillingPlans({ className }: LandingStaticBillingPla
     window.location.assign(APP_LINKS.startBrand());
   }, []);
 
+  const redirectToBilling = useCallback(() => {
+    window.location.assign(APP_LINKS.billing());
+  }, []);
+
   return (
     <div className={cn("overflow-visible", className)}>
-      <div className="flex justify-center">
+      <WelcomeOfferBanner
+        priceLabel={formatUsd(WELCOME_PACK.priceCents)}
+        tokenAmount={WELCOME_PACK.tokenAmount}
+        storedAssetLimit={WELCOME_PACK.storedAssetLimit}
+        loading={false}
+        claimable
+        onClaim={redirectToBilling}
+      />
+
+      <div className="mt-8 flex justify-center">
         <BillingIntervalToggle value={interval} onChange={setInterval} />
       </div>
 

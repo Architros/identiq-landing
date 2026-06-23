@@ -94,7 +94,7 @@ export const LANDING_COPY = {
     eyebrow: "Pricing",
     title: "Plans that scale with your brand output.",
     description:
-      "Starter from $9/mo with token packs matched to the app — sign in and checkout securely with Stripe. Unused tokens expire each billing period.",
+      "New customers can claim a one-time $5 welcome pack (40 tokens). Subscriptions start at $9/mo — sign in and checkout securely with Stripe. Unused tokens expire each billing period.",
   },
   faq: {
     eyebrow: "FAQ",

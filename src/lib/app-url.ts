@@ -16,6 +16,7 @@ export function appUrl(path: string): string {
 
 export const APP_LINKS = {
   login: () => appUrl("/login"),
+  billing: () => appUrl(`/login?next=${encodeURIComponent("/billing")}`),
   startBrand: (brandName?: string) => {
     const trimmed = brandName?.trim();
     const next = trimmed
