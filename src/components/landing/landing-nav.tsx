@@ -69,7 +69,7 @@ export function LandingNav() {
         >
           <Image
             src="/brand/logo-identiq.svg"
-            alt=""
+            alt="Identiq logo"
             width={40}
             height={29}
             className="h-9 w-auto"

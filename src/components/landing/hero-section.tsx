@@ -27,7 +27,7 @@ export function HeroSection() {
       </div>
 
       <div className="relative z-10 flex flex-1 flex-col justify-center px-4 pt-24 sm:px-6 lg:px-8">
-        <div className="hero-copy mx-auto flex w-full max-w-2xl flex-col items-center text-center">
+        <div className="hero-copy mx-auto flex w-full max-w-3xl flex-col items-center text-center">
           <Link
             href={APP_LINKS.startBrand()}
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-white backdrop-blur-md transition-colors hover:bg-white/15"

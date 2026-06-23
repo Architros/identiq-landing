@@ -2,42 +2,65 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { displayFont, geistSans } from "@landing/lib/fonts";
 import { HERO_MARQUEE_IMAGES } from "@landing/content/landing-media";
+import {
+  getSiteUrl,
+  SITE_DESCRIPTION,
+  SITE_HEADLINE,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_OG_IMAGE,
+} from "@landing/lib/site-seo";
 import "./globals.css";
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-  "https://tryidentiq.com";
+const siteUrl = getSiteUrl();
+const pageTitle = `${SITE_NAME} — On-Brand Social Posts, Ad Creatives & Brand Assets`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "identiq — AI Brand System",
-  description:
-    "Build your brand kit, remix premium templates, and ship on-brand assets with AI.",
+  title: {
+    default: pageTitle,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [...SITE_KEYWORDS],
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: siteUrl }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: "technology",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
     apple: "/favicon.ico",
   },
   openGraph: {
-    title: "identiq — AI Brand System",
-    description:
-      "Build your brand kit, remix premium templates, and ship on-brand assets with AI.",
+    title: pageTitle,
+    description: SITE_HEADLINE,
     type: "website",
-    images: [
-      {
-        url: "/thumbnail.png",
-        width: 500,
-        height: 274,
-        alt: "identiq — Generate Everything On-brand",
-      },
-    ],
+    url: siteUrl,
+    siteName: SITE_NAME,
+    locale: "en_US",
+    images: [SITE_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "identiq — AI Brand System",
-    description:
-      "Build your brand kit, remix premium templates, and ship on-brand assets with AI.",
-    images: ["/thumbnail.png"],
+    title: pageTitle,
+    description: SITE_HEADLINE,
+    images: [SITE_OG_IMAGE.url],
   },
 };
 

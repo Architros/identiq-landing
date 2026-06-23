@@ -11,12 +11,13 @@ export const LANDING_COPY = {
   announcement: "Secure the $5 launch offer",
   hero: {
     headline: {
-      before: "The ",
-      highlight: "brand",
-      after: " OS layer for ambitious companies.",
+      before:
+        "Generate social posts, ad creatives, and brand assets that always stay ",
+      highlight: "on brand",
+      after: ".",
     },
     subheadline:
-      "Identity, assets, and on-brand campaigns in one system — from first logo to launch.",
+      "Build your brand kit once — then ship consistent campaigns across social, ads, and every channel with AI.",
     registerPlaceholder: "Register your brand",
     registerCta: "Create brand",
     mediaCard: {
