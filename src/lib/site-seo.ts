@@ -29,8 +29,8 @@ export const SITE_KEYWORDS = [
 ] as const;
 
 export const SITE_OG_IMAGE = {
-  url: "/thumbnail.png",
-  width: 500,
-  height: 274,
+  url: "/thumbnail-larger.png",
+  width: 4000,
+  height: 2192,
   alt: "Identiq — on-brand social posts, ad creatives, and brand assets",
 } as const;
