@@ -8,16 +8,14 @@ export const LANDING_COPY = {
       { label: "FAQ", href: "#faq" },
     ],
   },
-  announcement: "Secure the $5 launch offer",
   hero: {
     headline: {
-      before:
-        "Generate social posts, ad creatives, and brand assets that always stay ",
-      highlight: "on brand",
-      after: ".",
+      before: "Brand With AI",
+      highlight: "",
+      after: "",
     },
     subheadline:
-      "Build your brand kit once — then ship consistent campaigns across social, ads, and every channel with AI.",
+      "Generate social posts, ad creatives, and brand assets that always stay on brand.",
     registerPlaceholder: "Register your brand",
     registerCta: "Create brand",
     mediaCard: {
@@ -95,7 +93,7 @@ export const LANDING_COPY = {
     eyebrow: "Pricing",
     title: "Plans that scale with your brand output.",
     description:
-      "New customers can claim a one-time $5 welcome pack (40 tokens). Subscriptions start at $9/mo — sign in and checkout securely with Stripe. Unused tokens expire each billing period.",
+      "Subscriptions start at $9/mo — sign in and checkout securely with Stripe. Unused tokens expire each billing period.",
   },
   faq: {
     eyebrow: "FAQ",

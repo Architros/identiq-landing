@@ -1,6 +1,7 @@
 import { CtaBand } from "@landing/components/landing/cta-band";
 import { FaqSection } from "@landing/components/landing/faq-section";
 import { HeroSection } from "@landing/components/landing/hero-section";
+import { HeroShowcaseStage } from "@landing/components/landing/hero-showcase-stage";
 import { HowItWorks } from "@landing/components/landing/how-it-works";
 import { IntegrationsSection } from "@landing/components/landing/integrations-section";
 import { PricingSection } from "@landing/components/landing/pricing-section";
@@ -48,9 +49,9 @@ function buildStructuredData() {
         url: siteUrl,
         offers: {
           "@type": "Offer",
-          price: "5.00",
+          price: "9.00",
           priceCurrency: "USD",
-          description: "One-time welcome pack for new customers",
+          description: "Starter plan from $9/mo",
         },
         publisher: { "@id": `${siteUrl}/#organization` },
       },
@@ -86,6 +87,12 @@ export default function LandingPage() {
       <LandingNav />
       <main className="overflow-x-clip">
         <HeroSection />
+        <section
+          aria-label="Brand showcase marquee"
+          className="border-b border-border bg-background pb-5 sm:pb-7"
+        >
+          <HeroShowcaseStage />
+        </section>
         <HowItWorks />
         <IntegrationsSection />
         <PricingSection />

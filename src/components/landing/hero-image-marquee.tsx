@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
 import { CdnImage } from "@landing/components/landing/cdn-image";
 import {
   HERO_MARQUEE_IMAGES,
@@ -8,22 +8,27 @@ import {
 } from "@landing/content/landing-media";
 import { cn } from "@landing/lib/utils";
 
-const MARQUEE_LOOP_SECONDS = 45;
+const ROW_A_LOOP_SECONDS = 42;
+const ROW_B_LOOP_SECONDS = 48;
+
+/** Stable SSR/hydration default — matches ~md showcase stage height. */
+const SSR_SHELL_HEIGHT_PX = 640;
 
 type TileLimits = {
   maxHeight: number;
   maxWidth: number;
 };
 
-function getTileLimits(viewportWidth: number): TileLimits {
-  if (viewportWidth >= 768) {
-    return { maxHeight: 440, maxWidth: 520 };
-  }
-  if (viewportWidth >= 640) {
-    return { maxHeight: 380, maxWidth: 420 };
-  }
-  return { maxHeight: 300, maxWidth: 280 };
+/** Size tiles from available marquee shell height so both rows stay tall and visible. */
+function getTileLimitsFromShellHeight(shellHeight: number): TileLimits {
+  const gap = 16;
+  const rowHeight = Math.floor((shellHeight - gap) / 2);
+  const maxHeight = Math.max(176, Math.min(rowHeight, 360));
+  const maxWidth = Math.round(maxHeight * 1.55);
+  return { maxHeight, maxWidth };
 }
+
+const SSR_TILE_LIMITS = getTileLimitsFromShellHeight(SSR_SHELL_HEIGHT_PX);
 
 function wrapOffset(offset: number, halfWidth: number) {
   if (halfWidth <= 0) return offset;
@@ -33,7 +38,6 @@ function wrapOffset(offset: number, halfWidth: number) {
   return next;
 }
 
-/** Uniform row height; width follows aspect ratio (object-cover crops overflow). */
 export function fitMarqueeTile(
   image: LandingTemplateImage,
   limits: TileLimits,
@@ -46,19 +50,22 @@ export function fitMarqueeTile(
   return { width, height };
 }
 
-function useMarqueeTileLimits(): TileLimits {
-  const [limits, setLimits] = useState<TileLimits>(() =>
-    typeof window !== "undefined"
-      ? getTileLimits(window.innerWidth)
-      : { maxHeight: 440, maxWidth: 520 },
-  );
+function useMarqueeTileLimits(shellRef: RefObject<HTMLDivElement | null>) {
+  const [limits, setLimits] = useState<TileLimits>(SSR_TILE_LIMITS);
 
   useEffect(() => {
-    const update = () => setLimits(getTileLimits(window.innerWidth));
+    const shell = shellRef.current;
+    if (!shell) return;
+
+    const update = () => {
+      setLimits(getTileLimitsFromShellHeight(shell.clientHeight));
+    };
+
     update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
+    const ro = new ResizeObserver(update);
+    ro.observe(shell);
+    return () => ro.disconnect();
+  }, [shellRef]);
 
   return limits;
 }
@@ -75,6 +82,22 @@ function usePrefersReducedMotion() {
   }, []);
 
   return reducedMotion;
+}
+
+function splitIntoRows(images: LandingTemplateImage[]) {
+  const rowA: LandingTemplateImage[] = [];
+  const rowB: LandingTemplateImage[] = [];
+
+  images.forEach((image, index) => {
+    if (index % 2 === 0) {
+      rowA.push(image);
+    } else {
+      rowB.push(image);
+    }
+  });
+
+  if (rowB.length === 0) rowB.push(...rowA);
+  return { rowA, rowB };
 }
 
 function MarqueeTile({
@@ -106,17 +129,23 @@ function MarqueeTile({
   );
 }
 
-export function HeroImageMarquee({ className }: { className?: string }) {
-  const limits = useMarqueeTileLimits();
-  const reducedMotion = usePrefersReducedMotion();
-  const loop = [...HERO_MARQUEE_IMAGES, ...HERO_MARQUEE_IMAGES];
-
-  const containerRef = useRef<HTMLDivElement>(null);
+function MarqueeRow({
+  images,
+  limits,
+  reducedMotion,
+  loopSeconds,
+  direction = "left",
+}: {
+  images: LandingTemplateImage[];
+  limits: TileLimits;
+  reducedMotion: boolean;
+  loopSeconds: number;
+  direction?: "left" | "right";
+}) {
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
   const halfWidthRef = useRef(0);
-  const dragRef = useRef({ active: false, startX: 0, startOffset: 0 });
-  const [isDragging, setIsDragging] = useState(false);
+  const loop = [...images, ...images];
 
   const applyTransform = useCallback(() => {
     const track = trackRef.current;
@@ -133,10 +162,8 @@ export function HeroImageMarquee({ className }: { className?: string }) {
   }, [applyTransform]);
 
   useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    const ro = new ResizeObserver(() => measureHalfWidth());
-    ro.observe(track);
+    const ro = new ResizeObserver(measureHalfWidth);
+    if (trackRef.current) ro.observe(trackRef.current);
     measureHalfWidth();
     return () => ro.disconnect();
   }, [measureHalfWidth, limits]);
@@ -152,9 +179,10 @@ export function HeroImageMarquee({ className }: { className?: string }) {
       last = now;
 
       const half = halfWidthRef.current;
-      if (half > 0 && !dragRef.current.active) {
-        const speed = half / MARQUEE_LOOP_SECONDS;
-        offsetRef.current = wrapOffset(offsetRef.current - speed * dt, half);
+      if (half > 0) {
+        const speed = half / loopSeconds;
+        const signedSpeed = direction === "left" ? -speed : speed;
+        offsetRef.current = wrapOffset(offsetRef.current + signedSpeed * dt, half);
         applyTransform();
       }
 
@@ -165,77 +193,74 @@ export function HeroImageMarquee({ className }: { className?: string }) {
     return () => cancelAnimationFrame(raf);
   }, [reducedMotion, limits, applyTransform]);
 
-  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (reducedMotion || e.button !== 0) return;
-    e.preventDefault();
-    e.currentTarget.setPointerCapture(e.pointerId);
-    e.currentTarget.style.touchAction = "none";
-    dragRef.current = {
-      active: true,
-      startX: e.clientX,
-      startOffset: offsetRef.current,
-    };
-    setIsDragging(true);
-  };
-
-  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!dragRef.current.active) return;
-    e.preventDefault();
-    const half = halfWidthRef.current;
-    const next =
-      dragRef.current.startOffset + (e.clientX - dragRef.current.startX);
-    offsetRef.current = half > 0 ? wrapOffset(next, half) : next;
-    applyTransform();
-  };
-
-  const endDrag = (target: HTMLDivElement, pointerId: number) => {
-    if (!dragRef.current.active) return;
-    dragRef.current.active = false;
-    setIsDragging(false);
-    target.style.touchAction = "";
-    if (target.hasPointerCapture(pointerId)) {
-      target.releasePointerCapture(pointerId);
-    }
-  };
-
-  const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
-    endDrag(e.currentTarget, e.pointerId);
-  };
-
-  const onPointerCancel = (e: React.PointerEvent<HTMLDivElement>) => {
-    endDrag(e.currentTarget, e.pointerId);
-  };
-
   return (
     <div
-      ref={containerRef}
       className={cn(
-        "relative flex h-full w-full items-center overflow-hidden bg-transparent select-none",
-        !reducedMotion && "cursor-grab",
-        isDragging && "cursor-grabbing",
-        className,
+        "relative h-full w-full overflow-hidden",
+        reducedMotion && "hero-marquee-row--static",
       )}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-      onPointerCancel={onPointerCancel}
-      aria-hidden
     >
       <div
         ref={trackRef}
         className={cn(
-          "hero-marquee-track flex w-max items-center gap-4 px-2 sm:px-4",
-          reducedMotion && "hero-marquee-track--static",
+          "hero-marquee-track hero-marquee-row-track flex w-max items-start gap-3 sm:gap-4",
+          reducedMotion && "hero-marquee-row-track--static",
         )}
       >
-        {loop.map((image, index) => (
+        {loop.map((image, index) => {
+          const isBaseCycle = index < images.length;
+          return (
           <MarqueeTile
             key={`${image.id}-${index}`}
             image={image}
             limits={limits}
-            priority={index < HERO_MARQUEE_IMAGES.length}
+            priority={isBaseCycle && index < 2}
           />
-        ))}
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+export function HeroImageMarquee({ className }: { className?: string }) {
+  const shellRef = useRef<HTMLDivElement>(null);
+  const limits = useMarqueeTileLimits(shellRef);
+  const reducedMotion = usePrefersReducedMotion();
+  const { rowA, rowB } = splitIntoRows(HERO_MARQUEE_IMAGES);
+
+  return (
+    <div
+      ref={shellRef}
+      className={cn(
+        "hero-marquee-shell relative flex h-full w-full select-none flex-col items-stretch justify-start gap-4 pt-0 sm:gap-5",
+        className,
+      )}
+      aria-hidden
+    >
+      <div
+        className="hero-marquee-row shrink-0"
+        style={{ height: limits.maxHeight }}
+      >
+        <MarqueeRow
+          images={rowA}
+          limits={limits}
+          reducedMotion={reducedMotion}
+          loopSeconds={ROW_A_LOOP_SECONDS}
+          direction="left"
+        />
+      </div>
+      <div
+        className="hero-marquee-row hero-marquee-row--offset shrink-0"
+        style={{ height: limits.maxHeight }}
+      >
+        <MarqueeRow
+          images={rowB}
+          limits={limits}
+          reducedMotion={reducedMotion}
+          loopSeconds={ROW_B_LOOP_SECONDS}
+          direction="right"
+        />
       </div>
     </div>
   );

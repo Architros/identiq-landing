@@ -10,6 +10,7 @@ import {
   formatUsd,
   listDisplayPacks,
   toDisplayPack,
+  WELCOME_OFFER_ENABLED,
   WELCOME_PACK,
   type BillingInterval,
 } from "@/lib/billing/plan-catalog";
@@ -53,16 +54,18 @@ export function LandingStaticBillingPlans({ className }: LandingStaticBillingPla
 
   return (
     <div className={cn("overflow-visible", className)}>
-      <WelcomeOfferBanner
-        priceLabel={formatUsd(WELCOME_PACK.priceCents)}
-        tokenAmount={WELCOME_PACK.tokenAmount}
-        storedAssetLimit={WELCOME_PACK.storedAssetLimit}
-        loading={false}
-        claimable
-        onClaim={redirectToBilling}
-      />
+      {WELCOME_OFFER_ENABLED ? (
+        <WelcomeOfferBanner
+          priceLabel={formatUsd(WELCOME_PACK.priceCents)}
+          tokenAmount={WELCOME_PACK.tokenAmount}
+          storedAssetLimit={WELCOME_PACK.storedAssetLimit}
+          loading={false}
+          claimable
+          onClaim={redirectToBilling}
+        />
+      ) : null}
 
-      <div className="mt-8 flex justify-center">
+      <div className={cn("flex justify-center", WELCOME_OFFER_ENABLED ? "mt-8" : "mt-0")}>
         <BillingIntervalToggle value={interval} onChange={setInterval} />
       </div>
 
