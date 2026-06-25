@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "prebuild": "node scripts/sync-identiq-app.mjs",
-    "dev": "next dev -p 3001 --webpack",
-    "build": "next build --webpack",
-    "start": "next start -p 3001",
+    "dev": "node init && next dev -p 3001 --webpack",
+    "build": "node init && next build --webpack",
+    "start": "node init && next start -p 3001",
     "lint": "eslint",
     "images:sync": "node scripts/sync-landing-images.mjs"
   },

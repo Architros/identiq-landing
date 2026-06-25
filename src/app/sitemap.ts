@@ -1,16 +1,6 @@
 import type { MetadataRoute } from "next";
-import { getSiteUrl } from "@landing/lib/site-seo";
+import { buildLandingSitemap } from "@landing/lib/landing-sitemap";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = getSiteUrl();
-  const lastModified = new Date();
-
-  return [
-    {
-      url: siteUrl,
-      lastModified,
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-  ];
+  return buildLandingSitemap();
 }

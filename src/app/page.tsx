@@ -88,8 +88,9 @@ export default function LandingPage() {
       <main className="overflow-x-clip">
         <HeroSection />
         <section
+          id="showcase"
           aria-label="Brand showcase marquee"
-          className="border-b border-border bg-background py-10 sm:py-14 lg:py-16"
+          className="scroll-mt-20 border-b border-border bg-background py-10 sm:py-14 lg:py-16"
         >
           <HeroShowcaseStage />
         </section>
