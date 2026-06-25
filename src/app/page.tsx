@@ -89,7 +89,7 @@ export default function LandingPage() {
         <HeroSection />
         <section
           aria-label="Brand showcase marquee"
-          className="border-b border-border bg-background pb-5 sm:pb-7"
+          className="border-b border-border bg-background py-10 sm:py-14 lg:py-16"
         >
           <HeroShowcaseStage />
         </section>

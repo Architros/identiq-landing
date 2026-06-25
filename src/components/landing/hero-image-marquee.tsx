@@ -233,7 +233,7 @@ export function HeroImageMarquee({ className }: { className?: string }) {
     <div
       ref={shellRef}
       className={cn(
-        "hero-marquee-shell relative flex h-full w-full select-none flex-col items-stretch justify-start gap-4 pt-0 sm:gap-5",
+        "hero-marquee-shell relative flex h-full w-full select-none flex-col items-stretch justify-start gap-4 py-2 sm:gap-5 sm:py-3",
         className,
       )}
       aria-hidden

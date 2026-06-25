@@ -5,7 +5,7 @@ import { ProgressiveBlur } from "@landing/components/landing/progressive-blur";
 
 export function HeroShowcaseStage() {
   return (
-    <div className="hero-showcase-stage relative h-[min(92vw,44rem)] w-full bg-transparent sm:h-160 md:h-176">
+    <div className="hero-showcase-stage relative mx-auto h-[min(92vw,44rem)] w-full max-w-[100vw] bg-transparent px-2 sm:h-160 sm:px-4 md:h-176">
       <div className="absolute inset-0 z-0 bg-transparent">
         <HeroImageMarquee className="h-full bg-transparent" />
       </div>
